@@ -1,5 +1,3 @@
-ccc
-
 %Numerical example based on the Van Der Pol example from R2016b UKF Demo
 
 %Set up filter properties:
@@ -31,9 +29,13 @@ plot(t,yp)
 plot(t,yMeas)
 ylabel('x_1')
 hLeg = legend({'True','Filter Estimate','Measured'},'Location','Best');
-%toggle lines when the legend is clicked on:
-ihFcn = @(h,e) set(e.Peer,'Visible',lower(regexprep(e.Peer.Visible,{'ff','n'},{'N','ff'},'once')));
-hLeg.ItemHitFcn = ihFcn;
+
+%toggle lines when the legend is clicked on (won't work for old versions)
+vn = version('-release');
+if strcmp(vn,'2016b') || str2double(vn(1:4)) >= 2017
+    ihFcn = @(h,e) set(e.Peer,'Visible',lower(regexprep(e.Peer.Visible,{'ff','n'},{'N','ff'},'once')));
+    hLeg.ItemHitFcn = ihFcn;
+end
 
 hAx(2,1) = subplot(2,1,2);
 plot(t,xTrue(:,2))
