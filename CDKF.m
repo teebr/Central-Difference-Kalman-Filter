@@ -103,7 +103,7 @@ classdef(Abstract) CDKF < matlab.System  & matlab.system.mixin.Propagates
             no = size(obj.R,1); %number of outputs
 
             % calculate coefficents and other useful things
-            l  = 2*ns + 1; %number of augmented states
+            l  = 2*ns + no; %number of augmented states
             l2 = 2*l + 1; %number of sigma points
             wm = 1/(2*obj.h^2) * ones(l2,1);% weighting vector
             wm(1) = (obj.h^2 - l)/(obj.h^2);
